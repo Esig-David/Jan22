@@ -55,7 +55,9 @@ public class ApoID_Clavier extends ApoDialog implements ActionListener {
             if (ae.getSource().equals(bouton[i])) {
                 inputCode.add(i);
                 for (int j = 0; j < inputCode.size(); j++) {
-                    boutonDisabled[j].setText("_");
+                    if (inputCode.size() <= LONGUEUR_CODE){
+                        boutonDisabled[j].setText("_");
+                    }
                 }
             }
         }
