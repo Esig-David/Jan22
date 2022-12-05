@@ -70,7 +70,6 @@ public class ApoID_Clavier extends ApoDialog implements ActionListener {
         }
         if (ae.getSource().equals(go)) {
             if (code.equals(inputCode)){
-                System.out.println("OK");
                 JOptionPane.showMessageDialog(null, "code correct !", "Api-identification", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
             } else {
