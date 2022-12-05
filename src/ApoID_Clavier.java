@@ -2,14 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ApoID_Clavier extends ApoDialog implements ActionListener {
     // NE PAS MODIFIER ces 3 lignes
     private static final String CHIFFRES_DANS_L_ORDRE = "0123456789";
     private static final int LONGUEUR_CODE = 4;
     private String resultatPourAffichage = super.retournerResultat();
-    JButton[] bouton = new JButton[10];
-    private JButton boutonDisabled;
+    private JButton[] bouton = new JButton[10];
+    ArrayList<Integer> inputCode = new ArrayList<>();
+    private JButton[] boutonDisabled = new JButton[5];
 
     ApoID_Clavier(JFrame f, String titre, String codeCorrect)// NE PAS MODIFIER  cet en-tête
     {
@@ -34,15 +36,11 @@ public class ApoID_Clavier extends ApoDialog implements ActionListener {
         add(go);
         add(stop);
         for (int i = 0; i < 4; i++) {
-            boutonDisabled = new JButton();
-            add(boutonDisabled);
-            boutonDisabled.setEnabled(false);
+            boutonDisabled[i] = new JButton();
+            add(boutonDisabled[i]);
+            boutonDisabled[i].setEnabled(false);
         }
 
-    }
-
-    public int valeurBouton(String bouton) {
-        return Integer.parseInt(bouton);
     }
 
     @Override
@@ -55,9 +53,13 @@ public class ApoID_Clavier extends ApoDialog implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         for (int i = 0; i < CHIFFRES_DANS_L_ORDRE.length(); i++) {
             if (ae.getSource().equals(bouton[i])) {
-                System.out.println(i);
+                inputCode.add(i);
+                for (int j = 0; j < inputCode.size(); j++) {
+                    boutonDisabled[j].setText("_");
+                }
             }
         }
+
     }
 
 }
