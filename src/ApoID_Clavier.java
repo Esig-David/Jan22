@@ -15,6 +15,7 @@ public class ApoID_Clavier extends ApoDialog implements ActionListener {
     private JButton go;
     private JButton stop;
     private String code;
+    private int nombreTentative = 0;
 
     ApoID_Clavier(JFrame f, String titre, String codeCorrect)// NE PAS MODIFIER  cet en-tête
     {
@@ -69,10 +70,23 @@ public class ApoID_Clavier extends ApoDialog implements ActionListener {
             }
         }
         if (ae.getSource().equals(go)) {
+            nombreTentative++;
             if (code.equals(inputCode)){
-                JOptionPane.showMessageDialog(null, "code correct !", "Api-identification", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "code correct !", "Apo-identification", JOptionPane.INFORMATION_MESSAGE);
+                inputCode = "";
                 System.exit(0);
             } else {
+                if (nombreTentative == 1){
+                    JOptionPane.showMessageDialog(null, "code erroné ! \n\n Deux essais restants", "Apo-identification", JOptionPane.WARNING_MESSAGE);
+                    inputCode = "";
+                } else if (nombreTentative == 2){
+                    JOptionPane.showMessageDialog(null, "code erroné ! \n\n Il reste un dernier essai", "Apo-identification", JOptionPane.WARNING_MESSAGE);
+                    inputCode = "";
+                } else {
+                    JOptionPane.showMessageDialog(null, "échec !", "Apo-identification", JOptionPane.ERROR_MESSAGE);
+                    inputCode = "";
+                    System.exit(0);
+                }
                 System.out.println("Pas Ok");
             }
         }
