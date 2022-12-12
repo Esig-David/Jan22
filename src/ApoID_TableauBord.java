@@ -9,13 +9,20 @@ import java.awt.event.WindowEvent;
 public class ApoID_TableauBord extends JFrame {
     private JButton codeHasard;
     private JButton saisirCode;
+    private JLabel codeTest;
+    private JLabel resultatTest;
 
     ApoID_TableauBord(JFrame f, String titre){
         setLayout(new FlowLayout());
         codeHasard = new JButton("tirer un code au hasard");
         saisirCode = new JButton("saisir un code");
+        codeTest = new JLabel("Code à tester");
+        resultatTest = new JLabel("Résultat du test");
         add(codeHasard);
         add(saisirCode);
+
+        add(codeTest);
+        add(resultatTest);
 
 
     }
