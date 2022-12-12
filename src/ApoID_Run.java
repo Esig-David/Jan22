@@ -18,7 +18,9 @@ public class ApoID_Run {
     private static void secondePhase() {//votre code ici
         //appelez setLocationRelativeTo(null); sur votre instance de fenêtre pour la centrer --après pack() !
         //facultatif...
-        ApoID_TableauBord tableauBord = new ApoID_TableauBord();
-
+        ApoID_TableauBord tableauBord = new ApoID_TableauBord(null,"Tableau de bord par David Carvalho");
+        tableauBord.setVisible(true);
+        tableauBord.setLocationRelativeTo(null);
+        tableauBord.pack();
     }
 }
