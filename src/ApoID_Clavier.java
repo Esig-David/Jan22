@@ -71,24 +71,32 @@ public class ApoID_Clavier extends ApoDialog implements ActionListener {
             nombreTentative++;
             if (code.equals(inputCode)){
                 JOptionPane.showMessageDialog(null, "code correct !", "Apo-identification", JOptionPane.INFORMATION_MESSAGE);
+                resultatPourAffichage = "Réussite après 1 essai";
                 inputCode = "";
                 System.exit(0);
             } else {
                 if (nombreTentative == 1){
                     JOptionPane.showMessageDialog(null, "code erroné ! \n\n Deux essais restants", "Apo-identification", JOptionPane.WARNING_MESSAGE);
+                    resultatPourAffichage = "Réussite après 2 essais";
                     inputAffichage("");
                     inputCode = "";
                 } else if (nombreTentative == 2){
                     JOptionPane.showMessageDialog(null, "code erroné ! \n\n Il reste un dernier essai", "Apo-identification", JOptionPane.WARNING_MESSAGE);
+                    resultatPourAffichage = "Réussite après 3 essais";
                     inputAffichage("");
                     inputCode = "";
                 } else {
                     JOptionPane.showMessageDialog(null, "échec !", "Apo-identification", JOptionPane.ERROR_MESSAGE);
+                    resultatPourAffichage = "Echec après 3 essais";
                     inputAffichage("");
                     inputCode = "";
                     System.exit(0);
                 }
             }
+        }
+        else if (ae.getSource().equals(stop)){
+            resultatPourAffichage = "Abandon";
+            System.exit(0);
         }
 
     }
