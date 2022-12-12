@@ -22,11 +22,13 @@ public class ApoID_Clavier extends ApoDialog implements ActionListener {
         super(f, titre);
         code = codeCorrect;
         setLayout(new GridLayout(4, 0));
+        String chiffres = KnuthShuffle.melangerLettres(CHIFFRES_DANS_L_ORDRE);
         for (int i = 0; i < CHIFFRES_DANS_L_ORDRE.length(); i++) {
-            bouton[i] = new JButton();
-            bouton[i].setText(String.valueOf(CHIFFRES_DANS_L_ORDRE.charAt(i)));
-            add(bouton[i]);
-            bouton[i].addActionListener(this);
+            int chiffre = Integer.parseInt(String.valueOf(chiffres.charAt(i)));
+            bouton[chiffre] = new JButton();
+            bouton[chiffre].setText(String.valueOf(chiffres.charAt(i)));
+            add(bouton[chiffre]);
+            bouton[chiffre].addActionListener(this);
         }
 
 
@@ -62,11 +64,7 @@ public class ApoID_Clavier extends ApoDialog implements ActionListener {
         for (int i = 0; i < CHIFFRES_DANS_L_ORDRE.length(); i++) {
             if (ae.getSource().equals(bouton[i])) {
                 inputCode += String.valueOf(i);
-                for (int j = 0; j < inputCode.length(); j++) {
-                    if (inputCode.length() <= LONGUEUR_CODE) {
-                        boutonDisabled[j].setText("_");
-                    }
-                }
+                inputAffichage("_");
             }
         }
         if (ae.getSource().equals(go)) {
@@ -78,19 +76,29 @@ public class ApoID_Clavier extends ApoDialog implements ActionListener {
             } else {
                 if (nombreTentative == 1){
                     JOptionPane.showMessageDialog(null, "code erroné ! \n\n Deux essais restants", "Apo-identification", JOptionPane.WARNING_MESSAGE);
+                    inputAffichage("");
                     inputCode = "";
                 } else if (nombreTentative == 2){
                     JOptionPane.showMessageDialog(null, "code erroné ! \n\n Il reste un dernier essai", "Apo-identification", JOptionPane.WARNING_MESSAGE);
+                    inputAffichage("");
                     inputCode = "";
                 } else {
                     JOptionPane.showMessageDialog(null, "échec !", "Apo-identification", JOptionPane.ERROR_MESSAGE);
+                    inputAffichage("");
                     inputCode = "";
                     System.exit(0);
                 }
-                System.out.println("Pas Ok");
             }
         }
 
+    }
+
+    private void inputAffichage(String s) {
+        for (int j = 0; j < inputCode.length(); j++) {
+            if (inputCode.length() <= LONGUEUR_CODE) {
+                boutonDisabled[j].setText(s);
+            }
+        }
     }
 
 }
